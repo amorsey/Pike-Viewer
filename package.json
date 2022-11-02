@@ -1,0 +1,19 @@
+{
+  "name": "Pike-Viewer",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/amorsey/Pike-Viewer.git",
+  "author": "AlexM <tempthing0@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "node-fetch": "^2.6.7"
+  },
+  "scripts": {
+    "heroku-postbuild": "cd pike-scheduler && npm install --only=dev --no-shrinkwrap && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set NODE_ENV=dev && node server.js"
+  }
+}
