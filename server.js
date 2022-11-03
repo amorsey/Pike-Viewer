@@ -1,10 +1,8 @@
 const express = require('express');
 
-//Production Run
-const URL = 'https://tcs-scheduler.herokuapp.com';
-
-//Dev Run
-//const URL = 'http://localhost:6002/';
+// Choose Production or Dev by changing URL
+// const URL = 'https://tcs-scheduler.herokuapp.com';
+const URL = 'http://localhost:6002/';
 
 const cors = require("cors");
 const fetch = require('node-fetch'); //needs to be node-fetch version 2.6.7
