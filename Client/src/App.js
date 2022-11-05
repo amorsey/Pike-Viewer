@@ -1,6 +1,5 @@
 import { useEffect } from "react"
-import mockData from "./data/realMockData.json"
-import Scheduler from "./components/Scheduler";
+import Scheduler from "./pages/SchedulerPage";
 import { useDispatch } from 'react-redux'
 import { setAllSessions } from './redux/allSessionsSlice'
 import { Routes, Route } from 'react-router-dom'
@@ -67,20 +66,21 @@ function App() {
     return weekSchedule
   }
 
-  useEffect(() => {
-    let url = window.location
-    let access_token = new URLSearchParams(url.search).get("code")
-
-    async function fetchData(){
-      const rawData = await fetch(`/week?AUTH_CODE=${access_token}`)
-      const data = await rawData.json()
-      const arrayOfSessions = data.event_occurrences
-      const weekSchedule = parseWeekData(arrayOfSessions)
-      dispatch(setAllSessions(weekSchedule))
-    }
-
-    fetchData()
-  }, [])
+  // useEffect(() => {
+  //   let url = window.location
+  //   console.log(url)
+  //   let access_token = new URLSearchParams(url.search).get("code")
+  //
+  //   async function fetchData(){
+  //     const rawData = await fetch(`http://localhost:6002/week?AUTH_CODE=${access_token}`)
+  //     const data = await rawData.json()
+  //     const arrayOfSessions = data.event_occurrences
+  //     const weekSchedule = parseWeekData(arrayOfSessions)
+  //     dispatch(setAllSessions(weekSchedule))
+  //   }
+  //
+  //   fetchData()
+  // }, [])
 
   return (
     <Routes>
