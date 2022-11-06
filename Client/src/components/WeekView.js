@@ -46,7 +46,7 @@ const WeekView = () => {
             <div className='timeColumnContainer'>
                 <h3>Times</h3>
                 {timeData.map((time) => {
-                    return <div className='slotContainerUnactive'>{time}</div>
+                    return <div className='slotContainerUnactive' key={time.id}>{time}</div>
                 })}
             </div>
 
@@ -54,7 +54,7 @@ const WeekView = () => {
             {weekData.map((day) => {
                 const daySchedule = weekSchedule[day]
                 const data = mapData(daySchedule)
-                return <Day day={day} data={data} />
+                return <Day day={day} data={data} key={day.id}/>
             })}
         </div>
     )

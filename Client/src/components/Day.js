@@ -20,7 +20,7 @@ const Day = ({ day, data }) => {
       <h3>{day}</h3>
       {timeData.map((time) => {
         let sessions = data[time]
-        return <Session data={data[time]} time={time} handleClick={() => handleClick(data[time])} />
+        return <Session data={data[time]} time={time} key = {time.id} handleClick={() => handleClick(data[time])} />
       })}
     </div>
   )
