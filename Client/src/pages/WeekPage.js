@@ -22,6 +22,7 @@ const Scheduler = () => {
         staff: [],
         event: "",
         students: [],
+        date: null,
       }
 
       let startTimeObject = new Date(rawSessionData.start_at)
@@ -32,6 +33,7 @@ const Scheduler = () => {
       sessionInfo.weekDay = startTimeObject.getDay()
       sessionInfo.nearHour = startTimeObject.getHours()
       sessionInfo.event = rawSessionData.name
+      sessionInfo.date = startTimeObject.getDate()
 
       let staffArray = rawSessionData.staff_members
       for(let staff = 0; staff < staffArray.length; staff++){
@@ -71,10 +73,8 @@ const Scheduler = () => {
     }
 
     useEffect(() =>{
-      console.log("TEST!@#")
       let url = window.location
       let access_token = new URLSearchParams(url.search).get("code")
-      console.log(access_token)
       async function fetchData(){
           const rawData = await fetch(`/week?AUTH_CODE=${access_token}`)
           const data = await rawData.json()

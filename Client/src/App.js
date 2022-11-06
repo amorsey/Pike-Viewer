@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import Scheduler from "./pages/SchedulerPage";
+import Scheduler from "./pages/WeekPage";
 import { useDispatch } from 'react-redux'
 import { setAllSessions } from './redux/allSessionsSlice'
 import { Routes, Route } from 'react-router-dom'
