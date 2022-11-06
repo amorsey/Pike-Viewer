@@ -74,9 +74,13 @@ const Scheduler = () => {
 
     useEffect(() =>{
       let url = window.location
+      const callback_url = 'http://localhost:3000/week-view';
       let access_token = new URLSearchParams(url.search).get("code")
+      let fetchRequest = `/week?CALLBACK_URL=${callback_url}&AUTH_CODE=${access_token}`
+      //let fetchRequest = `/week?AUTH_CODE=${access_token}`
+
       async function fetchData(){
-          const rawData = await fetch(`/week?AUTH_CODE=${access_token}`)
+          const rawData = await fetch(fetchRequest)
           const data = await rawData.json()
           const arrayOfSessions = data.event_occurrences
           const weekSchedule = parseWeekData(arrayOfSessions)
