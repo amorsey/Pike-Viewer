@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require("cors");
-const fetch = require('node-fetch'); //needs to be node-fetch version 2.6.7
+const fetch = require('node-fetch');
 const path = require('path');
 const helpers = require('./helperFunctions')
 require('dotenv').config();
@@ -16,6 +16,14 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, "pike-scheduler/build")))
 
+app.listen(port, () => {
+  console.log(`Listening on port ${port}...`);
+})
+
+// For serving frontend
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, "pike-scheduler/build", "index.html"))
+// })
 
 app.get('/week', async (req, res) => {
   // Get Authentication
@@ -30,7 +38,6 @@ app.get('/week', async (req, res) => {
   const rawData = await fetch(authRequest, {
       method: "POST"
   })
-
   // Fetch Data
   const data = await rawData.json()
   const TOKEN = data.access_token
@@ -42,21 +49,3 @@ app.get('/week', async (req, res) => {
   const payloadData = await payload.json()
   res.send(payloadData)
 })
-
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, "pike-scheduler/build", "index.html"))
-// })
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}...`);
-})
-
-
-
-// if (process.env.NODE_ENV === 'development') {
-//   // ...
-// }
-//
-// if (process.env.NODE_ENV === 'production') {
-//   // ...
-// }
