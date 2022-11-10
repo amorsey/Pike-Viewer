@@ -1,58 +1,42 @@
-function parseSessionData(rawSessionData){
-  var sessionInfo =  {
-    startTime: "",
-    endTime: "",
-    weekDay: null,
-    nearHour: null,
-    staff: [],
-    event: "",
-    students: [],
-    date: null,
-  }
+const weekDays = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday"
+]
 
-  let startTimeObject = new Date(rawSessionData.start_at)
-  let endTimeObject = new Date(rawSessionData.end_at)
-
-  sessionInfo.startTime = startTimeObject.toLocaleTimeString()
-  sessionInfo.endTime = endTimeObject.toLocaleTimeString()
-  sessionInfo.weekDay = startTimeObject.getDay()
-  sessionInfo.nearHour = startTimeObject.getHours()
-  sessionInfo.event = rawSessionData.name
-  sessionInfo.date = startTimeObject.getDate()
-
-  let staffArray = rawSessionData.staff_members
-  for(let staff = 0; staff < staffArray.length; staff++){
-    sessionInfo.staff.push(staffArray[staff].name)
-  }
-
-  let studentArray = rawSessionData.people
-  for(let student = 0; student < studentArray.length; student++){
-    sessionInfo.students.push(studentArray[student].name)
-  }
-
-  return sessionInfo
-}
-
-function parseWeekData(rawWeekData){
+export function parseWeekData(rawWeekData){
   const weekSchedule = {
+    sunday: [],
     monday: [],
     tuesday: [],
     wednesday: [],
     thursday: [],
     friday: [],
     saturday: [],
-    sunday: [],
   }
 
-  const weekDays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+  for(let i=0; i<rawWeekData.length; i++){
+    let rawSessionData = rawWeekData[i]
+    let startTimeObject = new Date(rawSessionData.start_at)
+    let endTimeObject = new Date(rawSessionData.end_at)
+    let weekDay = weekDays[startTimeObject.getDay()]
 
-
-  for(let event = 0; event < rawWeekData.length; event++){
-    let rawSession = rawWeekData[event]
-    let session = parseSessionData(rawSession)
-    let day = weekDays[session.weekDay]
-    weekSchedule[day].push(session)
+    let sessionInfo =  {
+      startTime: startTimeObject.toLocaleTimeString(),
+      endTime: endTimeObject.toLocaleTimeString(),
+      weekDay: startTimeObject.getDay(),
+      nearHour: startTimeObject.getHours(),
+      staff: rawSessionData.staff_members.map(staff => staff.name),
+      event: rawSessionData.name,
+      students: rawSessionData.people.map(student => student.name),
+      date: startTimeObject.getDate(),
+    }
+    weekSchedule[weekDay].push(sessionInfo)
   }
-
+  console.log(weekSchedule)
   return weekSchedule
 }

@@ -11,12 +11,9 @@ const LoginPage = () => {
       "&response_type=code" +
       `&redirect_uri=${redirectURL}`
     )
-
     const handleClick = () => {
         location.href = loginURL
     }
-
-
     return (
         <div>
             <button onClick={handleClick}>Login</button>
