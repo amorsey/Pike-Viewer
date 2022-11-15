@@ -1,29 +1,14 @@
-const weekDays = [
-  "sunday",
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday"
-]
+import { daysOfTheWeek } from './constants'
 
 export function parseWeekData(rawWeekData){
-  const weekSchedule = {
-    sunday: [],
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-    saturday: [],
-  }
+  // Generate dictionary using days of the week as keys
+  const weekSchedule = daysOfTheWeek.reduce((map, day) => (map[day]=[], map), {});
 
   for(let i=0; i<rawWeekData.length; i++){
     let rawSessionData = rawWeekData[i]
     let startTimeObject = new Date(rawSessionData.start_at)
     let endTimeObject = new Date(rawSessionData.end_at)
-    let weekDay = weekDays[startTimeObject.getDay()]
+    let weekDay = daysOfTheWeek[startTimeObject.getDay()]
 
     let sessionInfo =  {
       startTime: startTimeObject.toLocaleTimeString(),
@@ -37,6 +22,5 @@ export function parseWeekData(rawWeekData){
     }
     weekSchedule[weekDay].push(sessionInfo)
   }
-  console.log(weekSchedule)
   return weekSchedule
 }

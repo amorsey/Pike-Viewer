@@ -20,8 +20,7 @@ const Scheduler = () => {
       async function fetchData(){
           const rawData = await fetch(fetchRequest)
           const data = await rawData.json()
-          const arrayOfSessions = data.event_occurrences
-          const weekSchedule = parseWeekData(arrayOfSessions)
+          const weekSchedule = parseWeekData(data.event_occurrences)
           dispatch(setAllSessions(weekSchedule))
         }
         fetchData()

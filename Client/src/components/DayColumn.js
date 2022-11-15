@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import Session from './Session'
+import HourCell from './HourCell'
 import { useDispatch } from 'react-redux'
 import { setPopupInfo, setPopupState } from '../redux/popupSlice'
+import { hoursOfTheDay } from '.././constants'
 
-const Day = ({ day, data }) => {
-  const  timeData = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm"]
+const DayColumn = ({ day, data }) => {
   const dispatch = useDispatch()
-
   const handleClick = (data) => {
     console.log("click")
     if(data.length > 0){
@@ -18,12 +17,16 @@ const Day = ({ day, data }) => {
   return (
     <div className='RowContainer'>
       <h3>{day}</h3>
-      {timeData.map((time) => {
+      {hoursOfTheDay.map((time, id) => {
         let sessions = data[time]
-        return <Session data={data[time]} time={time} key = {time.id} handleClick={() => handleClick(data[time])} />
+        return (
+          <HourCell
+            data={data[time]}
+            time={time}
+            key={id}
+            handleClick={() => handleClick(data[time])} />)
       })}
     </div>
   )
 }
-
-export default Day
+export default DayColumn

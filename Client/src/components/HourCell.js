@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Session = ({ time, data, handleClick }) => {
+const HourCell = ({ time, data, handleClick }) => {
   let isActiveStyle = ""
   let display = ""
   if(data.length > 0){
@@ -15,4 +15,4 @@ const Session = ({ time, data, handleClick }) => {
   )
 }
 
-export default Session
+export default HourCell
