@@ -11,8 +11,8 @@ export function parseWeekData(rawWeekData){
     let weekDay = daysOfTheWeek[startTimeObject.getDay()]
 
     let sessionInfo =  {
-      startTime: startTimeObject.toLocaleTimeString(),
-      endTime: endTimeObject.toLocaleTimeString(),
+      startTime: startTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
+      endTime: endTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
       weekDay: startTimeObject.getDay(),
       nearHour: startTimeObject.getHours(),
       staff: rawSessionData.staff_members.map(staff => staff.name),

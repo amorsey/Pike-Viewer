@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { useDispatch } from 'react-redux'
 import { setAllSessions } from './../redux/allSessionsSlice'
 import { parseWeekData } from './../functions'
+import './WeekPage.css'
 
 const Scheduler = () => {
     const popupActive = useSelector(state => state.popup.active)

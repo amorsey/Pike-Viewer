@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from "react"
+import './LoginPage.css'
 
 const LoginPage = () => {
     // const redirectURL = "https://tcs-scheduler.herokuapp.com"

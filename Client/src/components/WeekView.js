@@ -21,7 +21,7 @@ const WeekView = () => {
                 let ampm = session.nearHour >= 12 ? 'pm' : 'am';
                 sessionsByHour[hour + ampm].push(session)
               })
-              return <DayColumn day={day} data={sessionsByHour} key={id}/>
+              return <DayColumn day={day} sessionsByHour={sessionsByHour} key={id}/>
             })}
         </div>
     )

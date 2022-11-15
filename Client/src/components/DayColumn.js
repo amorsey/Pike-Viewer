@@ -4,27 +4,22 @@ import { useDispatch } from 'react-redux'
 import { setPopupInfo, setPopupState } from '../redux/popupSlice'
 import { hoursOfTheDay } from '.././constants'
 
-const DayColumn = ({ day, data }) => {
+const DayColumn = ({ day, sessionsByHour }) => {
   const dispatch = useDispatch()
-  const handleClick = (data) => {
+  const handleClick = (event) => {
     console.log("click")
-    if(data.length > 0){
-      dispatch(setPopupInfo(data))
-      dispatch(setPopupState(true))
-    }
   }
 
   return (
-    <div className='RowContainer'>
+    <div className='dayColumn'>
       <h3>{day}</h3>
-      {hoursOfTheDay.map((time, id) => {
-        let sessions = data[time]
+      {hoursOfTheDay.map((hour, id) => {
         return (
           <HourCell
-            data={data[time]}
-            time={time}
+            sessions={sessionsByHour[hour]}
+            hour={hour}
             key={id}
-            handleClick={() => handleClick(data[time])} />)
+            handleClick={() => handleClick(sessionsByHour[hour])} />)
       })}
     </div>
   )

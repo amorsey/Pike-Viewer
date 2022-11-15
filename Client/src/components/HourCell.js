@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
+import SessionCell from './SessionCell'
 
-const HourCell = ({ time, data, handleClick }) => {
-  let isActiveStyle = ""
-  let display = ""
-  if(data.length > 0){
-    display = `${data.length} class today at ${time}`
-    isActiveStyle = "slotContainerActive"
+const HourCell = ({ hour, sessions, handleClick }) => {
+
+  if (sessions.length > 3){
+    let display = `${sessions.length} classes starting at ${hour}`
+    return <div className="activeCell" onClick={handleClick} data={sessions}>{display}</div>
+  } else if (sessions.length > 0){
+    return (
+      <div className="activeCell" onClick={handleClick}>
+      {sessions.map((session, id) => {
+        return <SessionCell session={session} cells={sessions.length} key={id} />
+      })}
+      </div>
+    )
   }else{
-    isActiveStyle = "slotContainerUnactive"
+    return <div className="emptyCell"></div>
   }
 
   return(
-    <div onClick={handleClick} className={isActiveStyle} data={data}>{display}</div>
+    <div
+      onClick={handleClick}
+      className={isActiveStyle}
+      data={sessions}>{display}</div>
   )
 }
-
 export default HourCell

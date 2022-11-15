@@ -1,0 +1,53 @@
+.weekContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #E5E5E5;
+}
+
+.timeColumnContainer {
+    display: flex;
+    flex-direction: column;
+    width: 115px;
+    padding: 10px;
+}
+
+.RowContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 115px;
+
+}
+
+.activeCell {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 70px;
+    border: 2px solid black;
+    background-color: #04AA6D;
+}
+
+.emptyCell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    border: 2px solid black;
+}
+
+.sessionCell {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  font-size: 0.9em;
+}
+
+.infoCell {
+  display: flex;
+}
