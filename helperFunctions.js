@@ -18,8 +18,9 @@ module.exports = {
 
     let fromRange = `from=${startYear}-${startMonth}-${startDay}T${startTime}Z`
     let toRange = `to=${endYear}-${endMonth}-${endDay}T${endTime}Z`
-    let weekRequest = `${pikeAPI}${requestType}?${fromRange}&${toRange}`
-    return weekRequest
+
+    let apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}`
+    return apiCall
   },
   generateAuthRequest: function (code, redirect_uri, client_id, client_secret){
     let oauthLink = "https://pike13.com/oauth/token"
@@ -37,7 +38,41 @@ module.exports = {
         clientSecret
     )
     return authRequest
-  }
+  },
+  generateNotesRequest: function(studentID){
+    const pikeAPI = "https://tcs-sanramon.pike13.com/api/v2/desk/people/"
+    return `${pikeAPI}${studentID}/notes`
+  },
+  determineLanguague: function(notes){
+    if (notes != null){
+      for (const n of notes){
+        let note = n["note"]
+        if (note.includes("Last 5 Notes")){
+          const recentLanguagues = {
+            html : getOccurrence(note.split(' '), "HTML"),
+            python : getOccurrence(note.split(' '), "Python"),
+            scratch : getOccurrence(note.split(' '), "Scratch"),
+            java : getOccurrence(note.split(' '), "Java"),
+            javascript : getOccurrence(note.split(' '), "Javascript"),
+            roblox : getOccurrence(note.split(' '), "Roblox"),
+            unity : getOccurrence(note.split(' '), "C#"),
+            other: 0.5
+          }
+          return Object.keys(recentLanguagues).reduce(
+            (a, b) => recentLanguagues[a] > recentLanguagues[b] ? a : b);
+        }
+      }
+    }
+    return "none"
+  },
 }
+
+function getOccurrence(my_array, value) {
+  return my_array.filter((v) => (v === value)).length;
+}
+
+// GET /api/v2/front/people/:person_id/notes/:id
+
+
 
 // console.log(module.exports.getWeeklySessionsRequest())
