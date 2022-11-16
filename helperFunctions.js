@@ -49,13 +49,13 @@ module.exports = {
         let note = n["note"]
         if (note.includes("Last 5 Notes")){
           const recentLanguagues = {
-            html : getOccurrence(note.split(' '), "HTML"),
-            python : getOccurrence(note.split(' '), "Python"),
-            scratch : getOccurrence(note.split(' '), "Scratch"),
-            java : getOccurrence(note.split(' '), "Java"),
-            javascript : getOccurrence(note.split(' '), "Javascript"),
-            roblox : getOccurrence(note.split(' '), "Roblox"),
-            unity : getOccurrence(note.split(' '), "C#"),
+            html : getOccurrence(note, "HTML"),
+            python : getOccurrence(note, "Python"),
+            scratch : getOccurrence(note, "Scratch"),
+            java : getOccurrence(note, "Java"),
+            javascript : getOccurrence(note, "Javascript"),
+            roblox : getOccurrence(note, "Roblox"),
+            unity : getOccurrence(note, "C#"),
             other: 0.5
           }
           return Object.keys(recentLanguagues).reduce(
@@ -68,11 +68,5 @@ module.exports = {
 }
 
 function getOccurrence(my_array, value) {
-  return my_array.filter((v) => (v === value)).length;
+  return my_array.split(' ').filter((v) => (v === value)).length;
 }
-
-// GET /api/v2/front/people/:person_id/notes/:id
-
-
-
-// console.log(module.exports.getWeeklySessionsRequest())

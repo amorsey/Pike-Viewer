@@ -48,49 +48,40 @@ app.get('/week', async (req, res) => {
   })
   let payloadData = await payload.json()
 
-  // Grab student topics
-  let updateFile = true
-  let fileExists = false
+  // Getting student topic by ID from notes.
+  // Checks for saved topic data locally and if it doesn't exist or a week...
+  // old it quries notes for each student and determines the most used topic...
+  // over the past 5 sessions.
+  let fileData = null
+  let daysSinceLastUpdate = 0
   try {
-    fs.readFileSync('studentData.json')
-    fileExists = true
-  } catch {
-    fileExists = false
+    fileData = fs.readFileSync('studentData.json')
+  } catch (error){
+    console.log("No file")
   }
-  if (fileExists){
-    let rawdata = fs.readFileSync('studentData.json');
-    let data = JSON.parse(rawdata);
-    let firstDate = new Date()
-    let secondDate = new Date(data["updateDate"])
-    const oneDay = 24 * 60 * 60 * 1000;
-    const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-    if (diffDays <= 7){
-      updateFile = false
-    }
+  if (fileData){
+    let data = JSON.parse(fileData);
+    daysSinceLastUpdate = compareDates(data["updateDate"])
   }
-  if (updateFile){
-    // Pull student topics
-    let students = payloadData["event_occurrences"].map(session => {
+  if (daysSinceLastUpdate >= 7 || fileData == null){
+    let studentIDs = payloadData["event_occurrences"].map(session => {
       return session["people"].map(student => {
         return student["id"]
       })
     }).flat()
-    let uniqueStudents = [...new Set(students)];
+    let uniqueStudentIDs = [...new Set(studentIDs)];
     let studentInfo = {}
-    for (const studentID of uniqueStudents){
-      let noteRequest = helpers.generateNotesRequest(studentID)
-      let notePayload = await fetch(noteRequest, {
+    for (const id of uniqueStudentIDs){
+      let notePayload = await fetch(helpers.generateNotesRequest(id), {
           method: 'GET',
           headers: { "Authorization": `Bearer ${TOKEN}` }
       })
       let notePayloadData = await notePayload.json()
       let languague = helpers.determineLanguague(notePayloadData["notes"])
-      studentInfo[studentID] = languague
-      console.log(languague)
+      studentInfo[id] = languague
     }
-    let now = new Date();
     fs.writeFileSync("studentData.json", JSON.stringify({
-      updateDate : now,
+      updateDate : new Date(),
       students : studentInfo
     }))
   }
@@ -102,3 +93,10 @@ app.get('/week', async (req, res) => {
   // console.log(students)
   res.send(payloadData)
 })
+
+function compareDates(oldDate){
+  let today = new Date()
+  let lastDate = new Date(oldDate)
+  const oneDay = 24 * 60 * 60 * 1000;
+  return Math.round(Math.abs((today - lastDate) / oneDay));
+}
