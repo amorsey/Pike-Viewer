@@ -26,7 +26,6 @@ app.listen(port, () => {
 // })
 
 app.get('/week', async (req, res) => {
-  // Get Authentication
   const authCode = req.query.AUTH_CODE
   const callbackURL = req.query.CALLBACK_URL
   const authRequest = helpers.generateAuthRequest(
@@ -38,7 +37,6 @@ app.get('/week', async (req, res) => {
   const rawData = await fetch(authRequest, {
       method: "POST"
   })
-  // Fetch Data
   const data = await rawData.json()
   const TOKEN = data.access_token
   let sessionRequest = helpers.generateSessionsRequest()
@@ -52,6 +50,7 @@ app.get('/week', async (req, res) => {
   // Checks for saved topic data locally and if it doesn't exist or a week...
   // old it quries notes for each student and determines the most used topic...
   // over the past 5 sessions.
+  let studentInfo = {}
   let fileData = null
   let daysSinceLastUpdate = 0
   try {
@@ -62,6 +61,7 @@ app.get('/week', async (req, res) => {
   if (fileData){
     let data = JSON.parse(fileData);
     daysSinceLastUpdate = compareDates(data["updateDate"])
+    studentInfo = data["students"]
   }
   if (daysSinceLastUpdate >= 7 || fileData == null){
     let studentIDs = payloadData["event_occurrences"].map(session => {
@@ -70,7 +70,6 @@ app.get('/week', async (req, res) => {
       })
     }).flat()
     let uniqueStudentIDs = [...new Set(studentIDs)];
-    let studentInfo = {}
     for (const id of uniqueStudentIDs){
       let notePayload = await fetch(helpers.generateNotesRequest(id), {
           method: 'GET',
@@ -85,12 +84,22 @@ app.get('/week', async (req, res) => {
       students : studentInfo
     }))
   }
-  // let students = payloadData["event_occurrences"].map(session => {
-  //   return session["people"].map(student => {
-  //     return student["id"]
+  let fullSessionData = payloadData["event_occurrences"].map(session => {
+    let studentsInSession = session["people"].map(student => {
+      return {...student, "topic": studentInfo[student["id"]]}
+    })
+    return {...session, "people": studentsInSession}
+  })
+  console.log(fullSessionData)
+  // console.log(fullSessionData)
+  // let fullSessionData = Object.keys(payloadData["event_occurrences"]).reduce(
+  //   (attrs, key) => ({
+  //     ...attrs,
+  //     [key]:
   //   })
-  // })
-  // console.log(students)
+  // )
+
+
   res.send(payloadData)
 })
 
