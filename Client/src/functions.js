@@ -11,6 +11,8 @@ export function parseWeekData(rawWeekData){
     let weekDay = daysOfTheWeek[startTimeObject.getDay()]
     let people =  rawSessionData.people
 
+    // In the case of more than 1 student I'm just using the topic of the...
+    // first one for now.
     let sessionInfo =  {
       startTime: startTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
       endTime: endTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
@@ -18,7 +20,7 @@ export function parseWeekData(rawWeekData){
       nearHour: startTimeObject.getHours(),
       staff: rawSessionData.staff_members.map(staff => staff.name),
       event: rawSessionData.name,
-      students: rawSessionData.people.map(student => student.name),
+      students: people.map(student => student.name),
       date: startTimeObject.getDate(),
       topic: people.length < 1 ? "" : people[0].topic,
     }
