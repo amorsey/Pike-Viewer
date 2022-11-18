@@ -7,6 +7,7 @@ const SessionCell = ({ session, cells}) => {
     return (<div className="sessionCell" data={session}>
       <div className="infoCell">{sessionType}</div>
       <div className="infoCell">{session.staff}</div>
+      <div className="infoCell">{session.topic}</div>
     </div>)
   } else if (cells == 2){
     return (<div className="sessionCell" data={session}>

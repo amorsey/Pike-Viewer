@@ -84,23 +84,15 @@ app.get('/week', async (req, res) => {
       students : studentInfo
     }))
   }
+  // Adding in the topic data to the original payload there may be a
+  // Cleaner way to do this.
   let fullSessionData = payloadData["event_occurrences"].map(session => {
     let studentsInSession = session["people"].map(student => {
       return {...student, "topic": studentInfo[student["id"]]}
     })
     return {...session, "people": studentsInSession}
   })
-  console.log(fullSessionData)
-  // console.log(fullSessionData)
-  // let fullSessionData = Object.keys(payloadData["event_occurrences"]).reduce(
-  //   (attrs, key) => ({
-  //     ...attrs,
-  //     [key]:
-  //   })
-  // )
-
-
-  res.send(payloadData)
+  res.send({"event_occurrences": fullSessionData})
 })
 
 function compareDates(oldDate){
