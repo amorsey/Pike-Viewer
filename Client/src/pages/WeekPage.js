@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import WeekView from './../components/WeekView'
-import Popup from './../components/Popup'
 import { useEffect } from "react"
 import { useDispatch } from 'react-redux'
 import { setAllSessions } from './../redux/allSessionsSlice'

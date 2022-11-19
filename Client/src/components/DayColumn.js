@@ -14,12 +14,7 @@ const DayColumn = ({ day, sessionsByHour }) => {
     <div className='dayColumn'>
       <h3>{day}</h3>
       {hoursOfTheDay.map((hour, id) => {
-        return (
-          <HourCell
-            sessions={sessionsByHour[hour]}
-            hour={hour}
-            key={id}
-            handleClick={() => handleClick(sessionsByHour[hour])} />)
+        return <HourCell sessions={sessionsByHour[hour]} hour={hour} key={id}/>
       })}
     </div>
   )

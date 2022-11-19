@@ -18,6 +18,7 @@ export function parseWeekData(rawWeekData){
       endTime: endTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
       weekDay: startTimeObject.getDay(),
       nearHour: startTimeObject.getHours(),
+      date: startTimeObject.getDate(),
       staff: rawSessionData.staff_members.map(staff => staff.name),
       event: rawSessionData.name,
       students: people.map(student => student.name),
