@@ -19,7 +19,7 @@ const HourCell = ({ hour, sessions }) => {
       <div className="activeCell" onClick={handleClick}>
       {sessions.map((session, id) => {
         return (
-          <div key={id}>
+          <div key={id}  className="sessionCell2">
             { showPopup ? <PopupView sessions={sessions}/> : null }
             <SessionCell session={session} cells={sessions.length}/>
           </div>
