@@ -8,7 +8,6 @@ const SessionCell = ({ session, cells}) => {
     <div className="infoCell">{session.staff}</div>
     <div className="infoCell">{session.topic}</div>
     <div className="infoCell">{session.startTime}</div>
-    <div className="infoCell">{session.date}</div>
   </div>)
 }
 export default SessionCell
