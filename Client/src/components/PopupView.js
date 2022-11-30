@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
 import SessionCell from './SessionCell'
+import SessionsList from './SessionsList'
 
 const PopupView = ({ sessions }) => {
   return (
   <div className="Popup">
-    {sessions.map((session, id) => {
-      return (
-        <div key={id}>
-          <SessionCell session={session} cells={sessions.length}/>
-        </div>
-      )
-    })}
+    <SessionsList sessions={sessions} />
   </div>)
 }
 export default PopupView

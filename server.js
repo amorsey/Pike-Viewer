@@ -63,7 +63,9 @@ app.get('/week', async (req, res) => {
     daysSinceLastUpdate = compareDates(data["updateDate"])
     studentInfo = data["students"]
   }
+  console.log(daysSinceLastUpdate + " days since last update.")
   if (daysSinceLastUpdate >= 7 || fileData == null){
+    console.log("Updating Student information.")
     let studentIDs = payloadData["event_occurrences"].map(session => {
       return session["people"].map(student => {
         return student["id"]
@@ -84,8 +86,7 @@ app.get('/week', async (req, res) => {
       students : studentInfo
     }))
   }
-  // Adding in the topic data to the original payload there may be a
-  // Cleaner way to do this.
+  // Adding in the topic data to the original payload.
   let fullSessionData = payloadData["event_occurrences"].map(session => {
     let studentsInSession = session["people"].map(student => {
       return {...student, "topic": studentInfo[student["id"]]}
