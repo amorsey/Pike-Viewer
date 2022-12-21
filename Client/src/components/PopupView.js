@@ -4,7 +4,7 @@ import SessionsList from './SessionsList'
 
 const PopupView = ({ sessions }) => {
   return (
-  <div className="Popup">
+  <div className="fullCellPopup">
     <SessionsList sessions={sessions} />
   </div>)
 }

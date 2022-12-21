@@ -6,10 +6,11 @@ import { daysOfTheWeek, hoursOfTheDay } from '.././constants'
 const WeekView = () => {
     let sessionsByDay = useSelector(state => state.allSessions)
     return (
-        <div className='weekContainer'>
-            <div className='hourColumn'>
+        <div className='weekPage'>
+            <div className='timesColumn'>
+                <div className='titleCell'> </div>
                 {hoursOfTheDay.map((time, id) => {
-                    return <div className='timeCell' key={id}>{time}</div>
+                    return <div className='titleCell' key={id}>{time}</div>
                 })}
             </div>
 

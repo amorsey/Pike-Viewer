@@ -12,7 +12,7 @@ const DayColumn = ({ day, sessionsByHour }) => {
 
   return (
     <div className='dayColumn'>
-      <h3>{day}</h3>
+      <div className='titleCell'>{day}</div>
       {hoursOfTheDay.map((hour, id) => {
         return <HourCell sessions={sessionsByHour[hour]} hour={hour} key={id}/>
       })}

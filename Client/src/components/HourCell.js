@@ -10,27 +10,20 @@ const HourCell = ({ hour, sessions }) => {
   if (sessions.length > 3){
     let display = `${sessions.length} classes starting at ${hour}`
     return (
-      <div onClick={handleClick}>
+      <div onClick={handleClick} className="titleCell" >
         { showPopup ? <PopupView sessions={sessions}/> : null }
-        <div className="activeCell" data={sessions}>{display}</div>
+        <div data={sessions}>{display}</div>
       </div>
     )
   } else if (sessions.length > 0){
     return (
-      <div onClick={handleClick} className="activeCell">
+      <div onClick={handleClick} className="weekCell">
         { showPopup ? <PopupView sessions={sessions}/> : null }
         <SessionsList sessions={sessions}/>
       </div>
     )
-  }else{
+  } else{
     return <div className="emptyCell"></div>
   }
-
-  return(
-    <div
-      onClick={handleClick}
-      className={isActiveStyle}
-      data={sessions}>{display}</div>
-  )
 }
 export default HourCell

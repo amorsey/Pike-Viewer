@@ -5,10 +5,10 @@ import PopupView from './PopupView'
 const SessionsList = ({ sessions }) => {
 
   return (
-  <div className="RowContainer">
+  <div className="sessionsList">
     {sessions.map((session, id) => {
       return (
-          <SessionCell session={session} cells={sessions.length}/>
+          <SessionCell session={session} cells={sessions.length} key={id}/>
       )
     })}
   </div>)

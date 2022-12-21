@@ -1,73 +1,74 @@
-.weekContainer {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    color: white;
+.weekPage{
+  display: flex;
+  background-color: black;
+  color: white;
 }
 
-.timeColumnContainer {
-    display: flex;
-    flex-direction: column;
-    width: 115px;
-    padding: 10px;
+.dayColumn{
+  width: 100vw;
 }
 
-.RowContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-    width: 115px;
+.titleCell {
+  border: 1px solid black;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 5em;
+  background-color: #28AD60;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.activeCell {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    height: 70px;
-    border: 2px solid black;
-    background-color: #28AD60;
-    color:white;
-    font-family: Arial, Helvetica, sans-serif;
+.weekCell {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 5em;
+  background-color: #28AD60;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .emptyCell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70px;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: #DBEEE3;
+  height: 5em;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: #DBEEE3;
+}
+
+.sessionsList {
+  flex-direction: column;
+  display: flex;
+  background-color: #e3eeff;
+  width: 100%;
+  height: 100%;
+  color: black;
 }
 
 .sessionCell {
-  display: flex;
-  flex-direction: column;
   border: 1px solid black;
-  width: 100%;
+  border-radius: 3px;
   height: 100%;
-  font-size: 0.9em;
-  overflow: hidden;
-}
-.sessionCell2 {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  font-size: 0.9em;
+  font-size: 1em;
   overflow: hidden;
 }
 
-.infoCell {
-  display: flex;
+.sessionTypeTag {
+  padding: 1px;
+  margin: 1px;
+  background-color: #bcd7ff;
+  border: 1px solid black;
+  border-radius: 3px;
 }
 
-.Popup {
+.sessionCoachTag {
+  padding: 2px;
+}
+
+.fullCellPopup{
   position:absolute;
-  width: 200px;
-  height: 400px;
+  width: 14vw;
   background-color: white;
+  border: 2px solid black;
 }
