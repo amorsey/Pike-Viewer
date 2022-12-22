@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import SessionCell from './SessionCell'
 import PopupView from './PopupView'
 import SessionsList from './SessionsList'
+import { firstUpper } from './../functions'
 
 const HourCell = ({ hour, sessions }) => {
   const [showPopup, setPopup] = React.useState(false);
   let handleClick = event => setPopup(true)
 
-  if (sessions.length > 3){
-    let display = `${sessions.length} classes starting at ${hour}`
+  if (sessions.length > 4){
+    let display = `${sessions.length} Classes`
     return (
-      <div onClick={handleClick} className="titleCell" >
+      <div onClick={handleClick} className="fullCell" >
         { showPopup ? <PopupView sessions={sessions}/> : null }
         <div data={sessions}>{display}</div>
       </div>

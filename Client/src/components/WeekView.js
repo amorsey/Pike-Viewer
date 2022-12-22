@@ -10,7 +10,7 @@ const WeekView = () => {
             <div className='timesColumn'>
                 <div className='titleCell'> </div>
                 {hoursOfTheDay.map((time, id) => {
-                    return <div className='titleCell' key={id}>{time}</div>
+                    return <div className='titleCell' key={id}>{time.toUpperCase()}</div>
                 })}
             </div>
 

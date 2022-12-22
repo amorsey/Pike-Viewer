@@ -29,3 +29,12 @@ export function parseWeekData(rawWeekData){
   }
   return weekSchedule
 }
+
+
+export function firstUpper(string){
+  if( string.length > 0 ){
+    return string[0].toUpperCase() + string.substring(1)
+  }else {
+    return ""
+  }
+}
