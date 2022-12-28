@@ -28,7 +28,9 @@ const Scheduler = () => {
 
     return (
         <div className='schedulerContainer'>
-            <h1>Week View</h1>
+            <div>
+              <input></input>
+            </div>
             {popupActive ? <Popup /> : <WeekView />}
         </div>
     )

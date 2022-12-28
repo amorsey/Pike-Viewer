@@ -16,8 +16,8 @@ module.exports = {
     let endMonth = (nextSaturday.getMonth() + 1).toString().padStart(2, '0');
     let endDay = nextSaturday.getDate()
 
-    let fromRange = `from=${startYear}-${startMonth}-${startDay}T${startTime}Z`
-    let toRange = `to=${endYear}-${endMonth}-${endDay}T${endTime}Z`
+    let fromRange = `from=${startYear}-${startMonth}-${startDay-7}T${startTime}Z`
+    let toRange = `to=${endYear}-${endMonth}-${endDay-7}T${endTime}Z`
 
     let apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}`
     return apiCall
