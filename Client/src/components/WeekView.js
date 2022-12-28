@@ -1,10 +1,8 @@
 import React from 'react'
 import DayColumn from './DayColumn'
-import { useSelector } from 'react-redux'
 import { daysOfTheWeek, hoursOfTheDay } from '.././constants'
 
-const WeekView = () => {
-    let sessionsByDay = useSelector(state => state.allSessions)
+const WeekView = ({sessionsByDay}) => {
     return (
         <div className='weekPage'>
             <div className='timesColumn'>
