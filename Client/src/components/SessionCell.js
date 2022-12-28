@@ -8,7 +8,7 @@ const SessionCell = ({ session, cells}) => {
     studentInfo = <div className="sessionDataTag">
       <div>Students:</div>
       {session.students.map((student, id) => {
-        return (<div className="studentTag" key={id}>{" " + student + " "}</div>)
+        return (<div className="studentTag" key={id}>{student}</div>)
       })}
     </div>
   }
@@ -18,10 +18,14 @@ const SessionCell = ({ session, cells}) => {
   <div className="sessionCell">
     <div className="sessionTitleTag">
       <div className="sessionTypeTag">{sessionType}</div>
-      <div className="sessionTopicTag">{firstUpper(session.topic)}</div>
+      <div className="sessionTopicTag"><b>{firstUpper(session.topic)}</b></div>
     </div>
-    <div className="sessionDataTag">{session.staff}</div>
-    <div className="sessionDataTag">Time: {session.startTime}</div>
+    <div className="sessionDataTag">
+    {session.staff.map((staff, id) => {
+        return (<div className="CoachTag" key={id}><b>{staff}</b></div>)
+      })}
+    </div>
+    <div className="sessionDataTag">{session.startTime} - {session.endTime}</div>
     {studentInfo}
   </div>)
 }

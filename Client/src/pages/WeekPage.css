@@ -26,7 +26,7 @@
   text-align: center;
   margin: 1px;
   border: 1px solid #046c99;
-  background-color: #07a0e5;
+  background-color: #0898db;
   color: white;
   border-radius: 3px;
   height: 5em;
@@ -38,6 +38,15 @@
   flex-direction: column;
   align-items: center;
   height: 5em;
+  background-color: #28AD60;
+}
+
+.weekCellLong {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 7.5em;
   background-color: #28AD60;
 }
 
@@ -60,7 +69,7 @@
 .sessionCell {
   margin: 1px;
   border: 1px solid #046c99;
-  background-color: #07a0e5;
+  background-color: #0898db;
   color: white;
   border-radius: 3px;
   height: 100%;
@@ -76,14 +85,30 @@
 
 .sessionDataTag {
   display: flex;
-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
+
 .studentTag {
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-left: 3px;
+  font-size: 0.9em;
+  border: 1px solid #61d0ff;
+  background-color: #61d0ff;
+  color: black;
+  border-radius: 10px;
+  height: 1.5em;
+}
+
+.CoachTag {
+  padding-right: 3px;
+  font-size: 1em;
+  color: rgb(255, 255, 255);
 }
 
 .sessionTopicTag {
   margin-right: 5px;
-  color: orange;
+  color: rgb(255, 185, 56);
 }
 
 .fullCellPopup{
@@ -91,4 +116,10 @@ flex-wrap: wrap;
   width: 14vw;
   background-color: white;
   border: 2px solid black;
+}
+
+.emptyTop {
+  background-color: red;
+  height: 100px;
+  width: 100px;
 }

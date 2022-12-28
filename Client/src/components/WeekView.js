@@ -21,6 +21,8 @@ const WeekView = () => {
                 let hour =  session.nearHour == 12 ? 12 : session.nearHour % 12
                 let ampm = session.nearHour >= 12 ? 'pm' : 'am';
                 sessionsByHour[hour + ampm].push(session)
+                // Make sure the array is sorted
+                sessionsByHour[hour + ampm].sort((a, b) => parseMinutes(a.startTime) - parseMinutes(b.startTime));
               })
               return <DayColumn day={day} sessionsByHour={sessionsByHour} key={id}/>
             })}
@@ -28,3 +30,7 @@ const WeekView = () => {
     )
 }
 export default WeekView
+
+function parseMinutes(time){
+    return time.split(":")[1].substring(0, 2)
+}
