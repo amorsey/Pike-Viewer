@@ -23,3 +23,19 @@ export const hoursOfTheDay = [
   "7pm",
   "8pm"
 ]
+
+
+export const monthsOfTheYear = [
+  "January",
+  "Febuary",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+]

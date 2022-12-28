@@ -1,15 +1,52 @@
 import React from 'react'
+import { useState } from 'react';
 import { useSelector } from 'react-redux'
 import WeekView from './../components/WeekView'
 import { useEffect } from "react"
 import { useDispatch } from 'react-redux'
 import { setAllSessions } from './../redux/allSessionsSlice'
-import { parseWeekData } from './../functions'
+import { parseWeekData, firstUpper } from './../functions'
+import { monthsOfTheYear } from '.././constants'
 import './WeekPage.css'
 
 const Scheduler = () => {
+    let sessionsByDay = useSelector(state => state.allSessions)
     const popupActive = useSelector(state => state.popup.active)
     const dispatch = useDispatch()
+    const [searchField, setSearchField] = useState("");
+
+    // const filteredSessions = Object.entries(sessionsByDay).map(([k, sessions]) => {
+    //   [k, sessions.]
+    // })
+    let filteredSessions = {}
+    for (let [k, v] of Object.entries(sessionsByDay)) {
+      filteredSessions[k] = v.filter(
+        session => {
+          return(session.staff[0].toLowerCase().includes(searchField) ||
+                session.topic.toLowerCase().includes(searchField) 
+        )
+        }
+      )
+    }
+
+    // const filteredPersons = details.filter(
+    //   person => {
+    //     return (
+    //       person
+    //       .name
+    //       .toLowerCase()
+    //       .includes(searchField.toLowerCase()) ||
+    //       person
+    //       .email
+    //       .toLowerCase()
+    //       .includes(searchField.toLowerCase())
+    //     );
+    //   }
+    // );
+
+    const handleChange = e => {
+      setSearchField(e.target.value);
+    };
 
     useEffect(() => {
       let url = window.location
@@ -26,12 +63,30 @@ const Scheduler = () => {
         fetchData()
     })
 
+    let today = new Date();
+    let lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
+    let nextSaturday = new Date(today.setDate(today.getDate()-today.getDay()+6));
+    let text = (monthsOfTheYear[lastSunday.getMonth()] + " " +
+              lastSunday.getDate() + " " +
+              today.getFullYear() + " to " +
+              monthsOfTheYear[nextSaturday.getMonth()] + " " +
+              nextSaturday.getDate() + " " +
+              nextSaturday.getFullYear())
+
     return (
         <div className='schedulerContainer'>
-            <div>
-              <input></input>
+            <div className='topBar'>
+            {text}
             </div>
-            {popupActive ? <Popup /> : <WeekView />}
+            <div className='optionBar'>
+            <input
+              className="searchBar"
+              type = "search"
+              placeholder = "Filter..."
+              onChange = {handleChange}
+            />
+            </div>
+            {popupActive ? <Popup /> : <WeekView sessionsByDay={filteredSessions} />}
         </div>
     )
 }
