@@ -19,7 +19,7 @@ module.exports = {
     let fromRange = `from=${startYear}-${startMonth}-${startDay-7}T${startTime}Z`
     let toRange = `to=${endYear}-${endMonth}-${endDay-7}T${endTime}Z`
 
-    let apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}`
+    let apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}&state=active`
     return apiCall
   },
   generateAuthRequest: function (code, redirect_uri, client_id, client_secret){
