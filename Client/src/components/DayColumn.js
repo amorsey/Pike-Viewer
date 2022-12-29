@@ -15,19 +15,30 @@ const DayColumn = ({ day, sessionsByHour }) => {
     <div className='dayColumn'>
       <div className='titleCell'>{firstUpper(day)}</div>
       {hoursOfTheDay.map((hour, id, elements) => {
-        let nextTopEmpty = false
+        let aboveHalfCell = false
         if (id+1 < elements.length && sessionsByHour[elements[id+1]].length==0){
-          nextTopEmpty = true
+          aboveHalfCell = true
         } else if (id+1 < elements.length){
-          nextTopEmpty = parseMinutes(sessionsByHour[elements[id+1]][0].startTime) > 0
+          aboveHalfCell = parseMinutes(sessionsByHour[elements[id+1]][0].startTime) > 0
+          let nextHour = sessionsByHour[elements[id+1]]
+          for (let i=0; i<nextHour.length; i++){
+            if (parseMinutes(nextHour[i].startTime) == 0){
+              aboveHalfCell = false
+              break
+            }
+          }
         }
-        let aboveOverflow = false
-        if (id-1 >= 0 && sessionsByHour[elements[id+1]].length==0){
-          nextTopEmpty = true
-        } else if (id+1 < elements.length){
-          nextTopEmpty = parseMinutes(sessionsByHour[elements[id+1]][0].startTime) > 0
+        let belowLongCell = false
+        if (id-1 >= 0){
+            let previousHour = sessionsByHour[elements[id-1]]
+            for (let i=0; i<previousHour.length; i++){
+              if (parseMinutes(previousHour[i].startTime) > 0){
+                belowLongCell = true
+                break
+              }
+            }
         }
-        return <HourCell sessions={sessionsByHour[hour]} nextTopEmpty={nextTopEmpty} hour={hour} key={id}/>
+        return <HourCell sessions={sessionsByHour[hour]} aboveHalfCell={aboveHalfCell} belowLongCell={belowLongCell} hour={hour} key={id}/>
       })}
     </div>
   )

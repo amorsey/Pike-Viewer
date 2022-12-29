@@ -14,6 +14,7 @@ const Scheduler = () => {
     const popupActive = useSelector(state => state.popup.active)
     const dispatch = useDispatch()
     const [searchField, setSearchField] = useState("");
+    const [firstOpen, setFirstOpen] = useState(true);
 
     // const filteredSessions = Object.entries(sessionsByDay).map(([k, sessions]) => {
     //   [k, sessions.]
@@ -28,39 +29,28 @@ const Scheduler = () => {
         }
       )
     }
-
-    // const filteredPersons = details.filter(
-    //   person => {
-    //     return (
-    //       person
-    //       .name
-    //       .toLowerCase()
-    //       .includes(searchField.toLowerCase()) ||
-    //       person
-    //       .email
-    //       .toLowerCase()
-    //       .includes(searchField.toLowerCase())
-    //     );
-    //   }
-    // );
-
     const handleChange = e => {
       setSearchField(e.target.value);
     };
 
     useEffect(() => {
-      let url = window.location
-      const callback_url = 'http://localhost:3000/week-view';
-      let access_token = new URLSearchParams(url.search).get("code")
-      let fetchRequest = `/week?CALLBACK_URL=${callback_url}&AUTH_CODE=${access_token}`
+      if (firstOpen){
+        console.log("load that shit")
+        setFirstOpen(false)
+        let url = window.location
+        const callback_url = 'http://localhost:3000/week-view';
+        let access_token = new URLSearchParams(url.search).get("code")
+        let fetchRequest = `/week?CALLBACK_URL=${callback_url}&AUTH_CODE=${access_token}`
 
-      async function fetchData(){
-          const rawData = await fetch(fetchRequest)
-          const data = await rawData.json()
-          const weekSchedule = parseWeekData(data.event_occurrences)
-          dispatch(setAllSessions(weekSchedule))
-        }
-        fetchData()
+        async function fetchData(){
+            const rawData = await fetch(fetchRequest)
+            const data = await rawData.json()
+            const weekSchedule = parseWeekData(data.event_occurrences)
+            dispatch(setAllSessions(weekSchedule))
+          }
+          fetchData()
+      }
+
     })
 
     let today = new Date();
