@@ -7,7 +7,10 @@ import CalCell from './CalCell'
 
 const HourCell = ({aboveHalfCell, belowLongCell, hour, sessions }) => {
   const [showPopup, setPopup] = React.useState(false);
-  let handleClick = event => setPopup(true)
+  let handleClick = event => {
+    console.log("Click")
+    setPopup(true)
+  }
 
   if (sessions.length > 0){
     let sessionOnHour = false
@@ -34,7 +37,7 @@ const HourCell = ({aboveHalfCell, belowLongCell, hour, sessions }) => {
       if (sessions.length > 1 && aboveHalfCell && bothTypes){
         name = "Long"
       } else if ( !aboveHalfCell && !sessionOnHour){
-        name = "Short" 
+        name = "Short"
       }
       return (<CalCell sessions={sessions} cellType={name} />)
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { firstUpper } from './../functions'
 
 const SessionCell = ({ session, cells}) => {
@@ -12,7 +12,6 @@ const SessionCell = ({ session, cells}) => {
       })}
     </div>
   }
-
 
   return (
   <div className="sessionCell">
