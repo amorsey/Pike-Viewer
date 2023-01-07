@@ -16,15 +16,12 @@ const Scheduler = () => {
     const [searchField, setSearchField] = useState("");
     const [firstOpen, setFirstOpen] = useState(true);
 
-    // const filteredSessions = Object.entries(sessionsByDay).map(([k, sessions]) => {
-    //   [k, sessions.]
-    // })
     let filteredSessions = {}
     for (let [k, v] of Object.entries(sessionsByDay)) {
       filteredSessions[k] = v.filter(
         session => {
           return(session.staff[0].toLowerCase().includes(searchField) ||
-                session.topic.toLowerCase().includes(searchField) 
+                session.topic.toLowerCase().includes(searchField)
         )
         }
       )
@@ -54,19 +51,12 @@ const Scheduler = () => {
     })
 
     let today = new Date();
-    let lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
-    let nextSaturday = new Date(today.setDate(today.getDate()-today.getDay()+6));
-    let text = (monthsOfTheYear[lastSunday.getMonth()] + " " +
-              lastSunday.getDate() + " " +
-              today.getFullYear() + " to " +
-              monthsOfTheYear[nextSaturday.getMonth()] + " " +
-              nextSaturday.getDate() + " " +
-              nextSaturday.getFullYear())
+
 
     return (
         <div className='schedulerContainer'>
             <div className='topBar'>
-            {text}
+            {"January"}
             </div>
             <div className='optionBar'>
             <input

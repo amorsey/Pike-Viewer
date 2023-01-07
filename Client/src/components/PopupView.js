@@ -2,7 +2,7 @@ import SessionCell from './SessionCell'
 import SessionsList from './SessionsList'
 import React, { useState, useRef, useEffect } from 'react'
 
-const PopupView = ({handleUnclick, sessions }) => {
+const PopupView = ({handleUnclick, sessions, type}) => {
 
   const ref = useRef(null);
 
@@ -20,7 +20,7 @@ const PopupView = ({handleUnclick, sessions }) => {
   })
 
   return (
-  <div ref={ref} className="fullCellPopup">
+  <div ref={ref} className={"popup"+type}>
     <SessionsList sessions={sessions} />
   </div>)
 }

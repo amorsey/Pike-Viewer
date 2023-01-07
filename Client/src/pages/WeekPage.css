@@ -8,7 +8,7 @@
 }
 
 .dayColumn{
-  width: 100vw;
+  width: 100%;
 }
 
 .titleCell {
@@ -21,8 +21,7 @@
   background-color: white;
 }
 
-.fullCell {
-  /* line-height: 5em; */
+/* .fullCell {
   text-align: center;
   margin: 1px;
   border: 1px solid #046c99;
@@ -30,7 +29,21 @@
   color: white;
   border-radius: 3px;
   height: 5em;
+} */
+
+.fullCell {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 5em;
+  background-color: #0898db;
+  color: white;
+  width: 100%;
+  border: 1px solid #046c99;
+  border-radius: 2px;
 }
+
 
 .fullCellLong {
   /* line-height: 5em; */
@@ -60,7 +73,7 @@
   flex-direction: column;
   align-items: center;
   height: 5em;
-  background-color: #28AD60;
+  background-color: white;
   width: 100%;
 }
 
@@ -70,7 +83,7 @@
   flex-direction: column;
   align-items: center;
   height: 7.5em;
-  background-color: #28AD60;
+  background-color: white;
 }
 
 .weekCellShort {
@@ -139,11 +152,25 @@
   color: rgb(255, 185, 56);
 }
 
-.fullCellPopup{
-  position:absolute;
-  width: 14vw;
+.popupFull{
+  position: absolute;
+  width: 15em;
   background-color: white;
-  border: 2px solid black;
+  border: 6px solid #02364C;
+  border-radius: 6px;
+  max-height: 20em;
+  overflow-y: scroll;
+  margin-top: -5em;
+  margin-left: -0.2em;
+}
+
+.popupShort{
+  position: absolute;
+  width: 15em;
+  background-color: white;
+  border: 6px solid #02364C;
+  border-radius: 6px;
+  margin-left: 2.5em;
 }
 
 .emptyCell {
@@ -160,12 +187,13 @@
 }
 
 .topBar{
-  background-color: #1C1A36;
-  color: white;
+  background-color: #white;
+  color: black;
+  font-family: Nunito;
   height: 1.5em;
-  border: 1px solid #1C1A36;
+  border: 1px solid #white;
   text-align: center;
-  font-size: 3em;
+  font-size: 2em;
 }
 
 .optionBar {

@@ -20,17 +20,23 @@ const CalCell = ({ sessions , cellType}) => {
         let display = `${sessions.length} Classes`
         return (
             <div onClick={handleClick} className={"fullCell"+cellType}>
-                { showPopup ? <PopupView handleUnclick={handleUnclick} sessions={sessions}/> : null }
+                { showPopup ? <PopupView handleUnclick={handleUnclick} sessions={sessions} type="Full"/> : null }
                 <div data={sessions}>{display}</div>
             </div>
         )
-    } else {
+    } else if (sessions.length > 1 ) {
         return (
             <div onClick={handleClick} className={"weekCell"+cellType}>
-                { showPopup ? <PopupView handleUnclick={handleUnclick} sessions={sessions}/> : null }
+                { showPopup ? <PopupView handleUnclick={handleUnclick} sessions={sessions} type="Short"/> : null }
                 <SessionsList sessions={sessions}/>
             </div>
         )
+    } else {
+      return (
+          <div onClick={handleClick} className={"weekCell"+cellType}>
+              <SessionsList sessions={sessions}/>
+          </div>
+      )
     }
 }
 export default CalCell
