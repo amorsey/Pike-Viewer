@@ -13,6 +13,7 @@ export function parseWeekData(rawWeekData){
 
     // In the case of more than 1 student I'm just using the topic of the...
     // first one for now.
+    let check = (people.length < 1 || typeof(people[0].topic) == "undefined")
     let sessionInfo =  {
       startTime: startTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
       endTime: endTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
@@ -23,7 +24,7 @@ export function parseWeekData(rawWeekData){
       event: rawSessionData.name,
       students: people.map(student => student.name),
       date: startTimeObject.getDate(),
-      topic: people.length < 1 ? "" : people[0].topic,
+      topic: check ? "" : people[0].topic,
     }
     weekSchedule[weekDay].push(sessionInfo)
   }

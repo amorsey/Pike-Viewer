@@ -1,25 +1,39 @@
 module.exports = {
-  generateSessionsRequest: function (){
+  generateSessionsRequest: function (dates){
     const startTime = "00:00:00";
     const endTime = "23:59:59";
     const pikeAPI = "https://tcs-sanramon.pike13.com/api/v2/"
     const requestType = "desk/event_occurrences"
 
-    let now = new Date();
-    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    let lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
-    let nextSaturday = new Date(today.setDate(today.getDate()-today.getDay()+6));
-    let startYear = lastSunday.getFullYear()
-    let startMonth = (lastSunday.getMonth() + 1).toString().padStart(2, '0');
-    let startDay = lastSunday.getDate()
-    let endYear = nextSaturday.getFullYear()
-    let endMonth = (nextSaturday.getMonth() + 1).toString().padStart(2, '0');
-    let endDay = nextSaturday.getDate()
 
+    let lastSunday = dates.split(",")[0]
+    let nextSaturday = dates.split(",")[1]
+    let startYear = lastSunday.split("/")[2]
+    let startMonth = lastSunday.split("/")[0]
+    let startDay = lastSunday.split("/")[1]
+    let endYear = nextSaturday.split("/")[2]
+    let endMonth = nextSaturday.split("/")[0]
+    let endDay = nextSaturday.split("/")[1]
     let fromRange = `from=${startYear}-${startMonth}-${startDay}T${startTime}Z`
     let toRange = `to=${endYear}-${endMonth}-${endDay}T${endTime}Z`
-
     let apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}&state=active`
+    console.log(apiCall)
+
+    // let now = new Date();
+    // let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    // lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
+    // nextSaturday = new Date(today.setDate(today.getDate()-today.getDay()+6));
+    // startYear = lastSunday.getFullYear()
+    // startMonth = (lastSunday.getMonth() + 1).toString().padStart(2, '0');
+    // startDay = lastSunday.getDate()
+    // endYear = nextSaturday.getFullYear()
+    // endMonth = (nextSaturday.getMonth() + 1).toString().padStart(2, '0');
+    // endDay = nextSaturday.getDate()
+    // fromRange = `from=${startYear}-${startMonth}-${startDay}T${startTime}Z`
+    // toRange = `to=${endYear}-${endMonth}-${endDay}T${endTime}Z`
+    // apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}&state=active`
+    // console.log(apiCall)
+
     return apiCall
   },
   generateAuthRequest: function (code, redirect_uri, client_id, client_secret){

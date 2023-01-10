@@ -28,6 +28,7 @@ app.listen(port, () => {
 app.get('/week', async (req, res) => {
   const authCode = req.query.AUTH_CODE
   const callbackURL = req.query.CALLBACK_URL
+  const dates = req.query.DATES
   const authRequest = helpers.generateAuthRequest(
       authCode,
       callbackURL,
@@ -39,7 +40,7 @@ app.get('/week', async (req, res) => {
   })
   const data = await rawData.json()
   const TOKEN = data.access_token
-  let sessionRequest = helpers.generateSessionsRequest()
+  let sessionRequest = helpers.generateSessionsRequest(dates)
   let payload = await fetch(sessionRequest, {
       method: 'GET',
       headers: { "Authorization": `Bearer ${TOKEN}` }
