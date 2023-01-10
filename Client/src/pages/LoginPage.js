@@ -8,7 +8,7 @@ const LoginPage = () => {
     const client_id = "Ks6unve0aR6E7VVYiPW2co0L6xdAWuZ53aaKl5yb"
     let loginURL = (
       "https://pike13.com/oauth/authorize" +
-      "?client_id=Ks6unve0aR6E7VVYiPW2co0L6xdAWuZ53aaKl5yb" +
+      "?client_id=" + client_id +
       "&response_type=code" +
       `&redirect_uri=${redirectURL}`
     )
