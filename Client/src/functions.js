@@ -14,6 +14,7 @@ export function parseWeekData(rawWeekData){
     // In the case of more than 1 student I'm just using the topic of the...
     // first one for now.
     let check = (people.length < 1 || typeof(people[0].topic) == "undefined")
+    console.log(people)
     let sessionInfo =  {
       startTime: startTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),
       endTime: endTimeObject.toLocaleTimeString([], {timeStyle: 'short'}),

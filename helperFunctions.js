@@ -17,22 +17,6 @@ module.exports = {
     let fromRange = `from=${startYear}-${startMonth}-${startDay}T${startTime}Z`
     let toRange = `to=${endYear}-${endMonth}-${endDay}T${endTime}Z`
     let apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}&state=active`
-    console.log(apiCall)
-
-    // let now = new Date();
-    // let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    // lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
-    // nextSaturday = new Date(today.setDate(today.getDate()-today.getDay()+6));
-    // startYear = lastSunday.getFullYear()
-    // startMonth = (lastSunday.getMonth() + 1).toString().padStart(2, '0');
-    // startDay = lastSunday.getDate()
-    // endYear = nextSaturday.getFullYear()
-    // endMonth = (nextSaturday.getMonth() + 1).toString().padStart(2, '0');
-    // endDay = nextSaturday.getDate()
-    // fromRange = `from=${startYear}-${startMonth}-${startDay}T${startTime}Z`
-    // toRange = `to=${endYear}-${endMonth}-${endDay}T${endTime}Z`
-    // apiCall = `${pikeAPI}${requestType}?${fromRange}&${toRange}&state=active`
-    // console.log(apiCall)
 
     return apiCall
   },

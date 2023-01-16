@@ -21,48 +21,24 @@
   background-color: white;
 }
 
-/* .fullCell {
-  text-align: center;
-  margin: 1px;
-  border: 1px solid #046c99;
-  background-color: #0898db;
-  color: white;
-  border-radius: 3px;
-  height: 5em;
-} */
-
-.fullCell {
-  text-align: center;
-  margin: 1px;
-  border: 1px solid #046c99;
-  background-color: #0898db;
-  color: white;
-  border-radius: 3px;
+.height-normal {
   height: 5em;
 }
 
-
-.fullCellLong {
-  /* line-height: 5em; */
-  text-align: center;
-  margin: 1px;
-  border: 1px solid #046c99;
-  background-color: #0898db;
-  color: white;
-  border-radius: 3px;
+.height-long {
   height: 7.5em;
 }
 
-.fullCellShort {
-  /* line-height: 5em; */
-  width: 99%;
-  margin: 1px;
+.height-short {
+  height: 2.5em;
+}
+
+.fullCell {
   text-align: center;
   border: 1px solid #046c99;
   background-color: #0898db;
   color: white;
-  border-radius: 3px;
-  height: 2.5em;
+  width: 100%;
 }
 
 .weekCell {
@@ -70,30 +46,9 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 5em;
   background-color: white;
   width: 100%;
 }
-
-.weekCellLong {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  height: 7.5em;
-  background-color: white;
-}
-
-.weekCellShort {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  height: 2.5em;
-  width: 100%;
-  background-color: #28AD60;
-}
-
 
 .sessionsList {
   text-align: left;
@@ -172,16 +127,9 @@
 }
 
 .emptyCell {
-  height: 5em;
-  border: 1px solid #dadce0;
-  background-color: white;
-}
-
-.emptyCellShort {
-  background-color: rgb(255, 255, 255);
-  height: 2.5em;
   width: 100%;
   border: 1px solid #dadce0;
+  background-color: white;
 }
 
 .topBar{
@@ -209,4 +157,17 @@
   border-radius: 8px;
   width: 200px;
   text-align: left;
+}
+
+
+.session-popup {
+  position: absolute;
+  width: 60em;
+  background-color: white;
+  border: 6px solid #02364C;
+  border-radius: 6px;
+  height: 40em;
+  left: 0;
+  right: 0;
+  margin: auto;
 }

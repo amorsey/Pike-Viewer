@@ -7,10 +7,6 @@ import { firstUpper } from './../functions'
 
 const DayColumn = ({ day, sessionsByHour }) => {
   const dispatch = useDispatch()
-  const handleClick = (event) => {
-    console.log("click")
-  }
-
   return (
     <div className='dayColumn'>
       <div className='titleCell'>{firstUpper(day)}</div>

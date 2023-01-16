@@ -7,10 +7,6 @@ import CalCell from './CalCell'
 
 const HourCell = ({aboveHalfCell, belowLongCell, hour, sessions }) => {
   const [showPopup, setPopup] = React.useState(false);
-  let handleClick = event => {
-    console.log("Click")
-    setPopup(true)
-  }
 
   let sessionOnHour = false
   let sessionNotOnHour = false
@@ -22,25 +18,25 @@ const HourCell = ({aboveHalfCell, belowLongCell, hour, sessions }) => {
     }
   }
   let bothTypes = sessionOnHour && sessionNotOnHour
-  let cellType = ""
+  let cellType = "height-normal"
   if (sessions.length > 1 && aboveHalfCell && bothTypes){
-    cellType = "Long"
+    cellType = "height-long"
   } else if (!aboveHalfCell && !sessionOnHour){
-    cellType = "Short"
+    cellType = "height-short"
   }
 
   if (sessions.length > 0  && !belowLongCell && !sessionOnHour && sessionNotOnHour){
       let name = aboveHalfCell ? "weekCellLong" :  "weekCell"
       return(
-        <div onClick={handleClick} className={name}>
-          <div className="emptyCellShort"></div>
+        <div className={name}>
+          <div className="emptyCell height-short"></div>
           <CalCell sessions={sessions} cellType={cellType} />
         </div>)
   } else if (sessions.length > 0)  {
       return (<CalCell sessions={sessions} cellType={cellType} />)
   } else {
-    let name = belowLongCell ? "emptyCellShort" :  "emptyCell"
-    return <div className={name}></div>
+    let cell_height = belowLongCell ? "height-short" :  "height-normal"
+    return <div className={"emptyCell " + cell_height}></div>
   }
 }
 export default HourCell

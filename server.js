@@ -79,6 +79,7 @@ app.get('/week', async (req, res) => {
           headers: { "Authorization": `Bearer ${TOKEN}` }
       })
       let notePayloadData = await notePayload.json()
+      console.log(notePayloadData)
       let languague = helpers.determineLanguague(notePayloadData["notes"])
       studentInfo[id] = languague
     }

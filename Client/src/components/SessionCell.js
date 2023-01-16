@@ -1,8 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { firstUpper } from './../functions'
+import SessionPopup from './SessionPopup'
 
 const SessionCell = ({ session, cells}) => {
   const sessionType = session.event.replace(/Code|Coaching/gi, '')
+  const [showPopup, setPopup] = React.useState(false);
+
+  let handleClick = event => {
+    setPopup(true)
+  }
+
+  let handleUnclick = function(){
+    setPopup(false)
+  }
+
   let studentInfo = ""
   if (session.students.length > 0){
     studentInfo = <div className="sessionDataTag">
@@ -14,7 +25,8 @@ const SessionCell = ({ session, cells}) => {
   }
 
   return (
-  <div className="sessionCell">
+  <div onClick={handleClick} className="sessionCell" >
+    { showPopup ? <SessionPopup handleUnclick={handleUnclick} session={session} type="Full"/> : null }
     <div className="sessionTitleTag">
       <div className="sessionTypeTag">{sessionType}</div>
       <div className="sessionTopicTag"><b>{firstUpper(session.topic)}</b></div>
